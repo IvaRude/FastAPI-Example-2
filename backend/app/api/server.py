@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.app.api.routes import router as api_router
 from backend.app.core import config, tasks
 
+
 def get_application():
     app = FastAPI(title=config.PROJECT_NAME, version=config.VERSION)
 
@@ -22,7 +23,6 @@ def get_application():
 
 
 app = get_application()
-
 
 if __name__ == '__main__':
     print('Heelo')
