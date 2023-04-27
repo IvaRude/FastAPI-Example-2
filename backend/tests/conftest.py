@@ -63,7 +63,7 @@ def event_loop(request):
     loop.close()
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 async def test_cleaning(db: Database) -> CleaningInDB:
     cleaning_repo = CleaningsRepository(db)
     new_cleaning = CleaningCreate(
