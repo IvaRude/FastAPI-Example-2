@@ -4,9 +4,10 @@ from typing import Optional
 from pydantic import EmailStr, constr, validator
 
 from backend.app.models.core import DateTimeModelMixin, IDModelMixin, CoreModel
-
-
 # simple check for valid username
+from backend.app.models.token import AccessToken
+
+
 def validate_username(username: str) -> str:
     allowed = string.ascii_letters + string.digits + "-" + "_"
     assert all(char in allowed for char in username), "Invalid characters in username."
@@ -67,4 +68,4 @@ class UserInDB(IDModelMixin, DateTimeModelMixin, UserBase):
 
 
 class UserPublic(IDModelMixin, DateTimeModelMixin, UserBase):
-    pass
+    access_token: Optional[AccessToken]
