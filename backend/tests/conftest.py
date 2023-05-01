@@ -17,7 +17,7 @@ sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
 
 from backend.app.api.server import get_application
 from backend.app.db.repositories.cleanings import CleaningsRepository
-from backend.app.models.cleanings import CleaningInDB, CleaningCreate
+from backend.app.models.cleaning import CleaningInDB, CleaningCreate
 
 
 # Apply migrations at beginning and end of testing session

@@ -3,7 +3,7 @@ from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
 from backend.app.api.dependencies.database import get_repository
 from backend.app.db.repositories.cleanings import CleaningsRepository
-from backend.app.models.cleanings import CleaningCreate, CleaningPublic, CleaningUpdate
+from backend.app.models.cleaning import CleaningCreate, CleaningPublic, CleaningUpdate
 
 router = APIRouter()
 

@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from starlette.status import HTTP_400_BAD_REQUEST
 
 from backend.app.db.repositories.base import BaseRepository
-from backend.app.models.cleanings import CleaningCreate, CleaningInDB, CleaningUpdate
+from backend.app.models.cleaning import CleaningCreate, CleaningInDB, CleaningUpdate
 
 CREATE_CLEANING_QUERY = """
     INSERT INTO cleanings (name, description, price, cleaning_type)

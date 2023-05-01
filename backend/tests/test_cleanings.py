@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from httpx import AsyncClient
 from starlette.status import HTTP_404_NOT_FOUND, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_201_CREATED, HTTP_200_OK
 
-from backend.app.models.cleanings import CleaningCreate, CleaningInDB
+from backend.app.models.cleaning import CleaningCreate, CleaningInDB
 
 
 # pytestmark = pytest.mark.asyncio
