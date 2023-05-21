@@ -1,9 +1,12 @@
 from datetime import datetime, timedelta
+from typing import Optional
 
 import bcrypt
 import jwt
+from fastapi import HTTPException
 from passlib.context import CryptContext
-
+from pydantic.error_wrappers import ValidationError
+from starlette.status import HTTP_401_UNAUTHORIZED
 from backend.app.core.config import SECRET_KEY, JWT_AUDIENCE, ACCESS_TOKEN_EXPIRE_MINUTES, JWT_ALGORITHM
 from backend.app.models.token import JWTMeta, JWTCreds, JWTPayload
 from backend.app.models.user import UserPasswordUpdate, UserInDB
@@ -57,3 +60,15 @@ class AuthService:
         # That is no longer the case and the `.decode("utf-8")` has been removed.
         access_token = jwt.encode(token_payload.dict(), secret_key, algorithm=JWT_ALGORITHM)
         return access_token
+
+    def get_username_from_token(self, *, token: str, secret_key: str) -> Optional[str]:
+        try:
+            decoded_token = jwt.decode(token, str(secret_key), audience=JWT_AUDIENCE, algorithms=[JWT_ALGORITHM])
+            payload = JWTPayload(**decoded_token)
+        except (jwt.PyJWTError, ValidationError):
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED,
+                detail="Could not validate token credentials.",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        return payload.username
